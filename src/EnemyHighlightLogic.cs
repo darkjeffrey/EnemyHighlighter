@@ -433,17 +433,17 @@ namespace EnemyHighlighter
             try
             {
                 MissionBehavior view = null;
-                foreach (MissionBehavior b in mission.MissionBehaviors)
+                foreach (MissionBehavior behavior in mission.MissionBehaviors)
                 {
-                    if (b != null && b.GetType().FullName == ViewTypeName) { view = b; break; }
+                    if (behavior != null && behavior.GetType().FullName == ViewTypeName) { view = behavior; break; }
                 }
                 if (view == null) return;
                 if (!_resolved)
                 {
                     _resolved = true;
-                    Type t = view.GetType();
-                    _appliedField = t.GetField("_isContourAppliedToFocusedAgent", BindingFlags.NonPublic | BindingFlags.Instance);
-                    _addMethod = t.GetMethod("AddContourToFocusedAgent", BindingFlags.NonPublic | BindingFlags.Instance, null, Type.EmptyTypes, null);
+                    Type viewType = view.GetType();
+                    _appliedField = viewType.GetField("_isContourAppliedToFocusedAgent", BindingFlags.NonPublic | BindingFlags.Instance);
+                    _addMethod = viewType.GetMethod("AddContourToFocusedAgent", BindingFlags.NonPublic | BindingFlags.Instance, null, Type.EmptyTypes, null);
                 }
                 if (_appliedField == null || _addMethod == null) return;
                 _appliedField.SetValue(view, false);

@@ -1,6 +1,6 @@
 # Enemy Highlighter
 
-A Mount & Blade II: Bannerlord mod (v1.4.8) that puts a coloured outline on every enemy near you when you hold a key, or toggles it on and off with one press. It works in field battles and sieges, hideouts, arena fights and tournaments, and fights in towns, castles and villages (alley fights, prison breaks, lord's hall fights). Only enemies within the distance you set get an outline, so troops far across the field don't clutter the screen.
+A Mount & Blade II: Bannerlord mod (v1.5.7) that puts a coloured outline on every enemy near you when you hold a key, or toggles it on and off with one press. It works in field battles and sieges, hideouts, arena fights and tournaments, and fights in towns, castles and villages (alley fights, prison breaks, lord's hall fights). Only enemies within the distance you set get an outline, so troops far across the field don't clutter the screen.
 
 ## How it works
 
@@ -47,7 +47,7 @@ All options take effect right away, also in the middle of a fight.
 
 ## Requirements
 
-- Mount & Blade II: Bannerlord v1.4.8, single player
+- Mount & Blade II: Bannerlord v1.5.7, single player
 - [Harmony](https://www.nexusmods.com/mountandblade2bannerlord/mods/2006), [ButterLib](https://www.nexusmods.com/mountandblade2bannerlord/mods/2018), [UIExtenderEx](https://www.nexusmods.com/mountandblade2bannerlord/mods/2102) and [Mod Configuration Menu v5](https://www.nexusmods.com/mountandblade2bannerlord/mods/612)
 
 ## Installing
@@ -70,6 +70,14 @@ The options are under **Options > Mod Options > Enemy Highlighter** in game.
 You need the [.NET SDK](https://dotnet.microsoft.com/download) (any recent version; the project targets .NET Framework 4.7.2 through the `Microsoft.NETFramework.ReferenceAssemblies` package, so no Visual Studio is required) and Bannerlord with the four requirements installed, because the project references their DLLs.
 
 From the `src` folder run `dotnet build -c Release`. The build copies the dll, `SubModule.xml` and `ModuleData` into `Modules\EnemyHighlighter` in the game folder. If the game is installed somewhere other than the default Steam folder, pass `/p:GameFolder="..."`.
+
+## Releasing
+
+1. Add a `## <version>` section to `CHANGELOG.md`, run `bltools.py bump EnemyHighlighter <version>`, rebuild and push.
+2. Run `bltools.py package EnemyHighlighter` to make `release/EnemyHighlighter-v<version>.zip`.
+3. Publish a GitHub Release tagged `v<version>` with that zip attached. The "Publish to Nexus Mods" workflow then uploads it to Nexus as the new version of the main file, with the changelog section as its changelog. It stops if the tag, `SubModule.xml` and the zip don't have the same version.
+
+The workflow needs the repository secret `NEXUS_API_KEY` (your personal key from Nexus Mods' API keys page).
 
 ## Translations
 

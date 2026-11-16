@@ -11,7 +11,7 @@ namespace EnemyHighlighter
     {
         private static readonly EnemyHighlighterMcmSettings Defaults = new EnemyHighlighterMcmSettings();
 
-        private static EnemyHighlighterMcmSettings S
+        private static EnemyHighlighterMcmSettings Current
         {
             get
             {
@@ -20,25 +20,25 @@ namespace EnemyHighlighter
             }
         }
 
-        public static bool Enabled => S.Enabled;
-        public static bool ToggleMode => S.ToggleMode;
-        public static bool ShowToggleMessage => S.ShowToggleMessage;
-        public static float MaxDistance => Math.Max(5, Math.Min(300, S.MaxDistance));
-        public static int MaxOutlined => Math.Max(0, Math.Min(500, S.MaxOutlined));
-        public static bool KeepToggleBetweenScenes => S.KeepToggleBetweenScenes;
-        public static bool WarnKeyConflicts => S.WarnKeyConflicts;
-        public static bool AllowInStealth => S.AllowInStealth;
-        public static bool HideInCutscenes => S.HideInCutscenes;
-        public static bool ThroughWalls => S.ThroughWalls;
-        public static bool OutlineFleeing => S.OutlineFleeing;
-        public static bool OutlineHorses => S.OutlineHorses;
-        public static bool DebugMessages => S.DebugMessages;
+        public static bool Enabled => Current.Enabled;
+        public static bool ToggleMode => Current.ToggleMode;
+        public static bool ShowToggleMessage => Current.ShowToggleMessage;
+        public static float MaxDistance => Math.Max(5, Math.Min(300, Current.MaxDistance));
+        public static int MaxOutlined => Math.Max(0, Math.Min(500, Current.MaxOutlined));
+        public static bool KeepToggleBetweenScenes => Current.KeepToggleBetweenScenes;
+        public static bool WarnKeyConflicts => Current.WarnKeyConflicts;
+        public static bool AllowInStealth => Current.AllowInStealth;
+        public static bool HideInCutscenes => Current.HideInCutscenes;
+        public static bool ThroughWalls => Current.ThroughWalls;
+        public static bool OutlineFleeing => Current.OutlineFleeing;
+        public static bool OutlineHorses => Current.OutlineHorses;
+        public static bool DebugMessages => Current.DebugMessages;
 
         public static InputKey HighlightKey
         {
             get
             {
-                try { return KeyChoices.Parse(S.HighlightKey?.SelectedValue); }
+                try { return KeyChoices.Parse(Current.HighlightKey?.SelectedValue); }
                 catch (Exception) { return KeyChoices.DefaultKey; }
             }
         }
@@ -47,7 +47,7 @@ namespace EnemyHighlighter
         {
             get
             {
-                try { return (S.OutlineColor?.SelectedValue ?? ColorChoice.All[0]).Value; }
+                try { return (Current.OutlineColor?.SelectedValue ?? ColorChoice.All[0]).Value; }
                 catch (Exception) { return ColorChoice.All[0].Value; }
             }
         }
@@ -56,10 +56,10 @@ namespace EnemyHighlighter
         {
             switch (kind)
             {
-                case SceneKind.Hideout: return S.InHideouts;
-                case SceneKind.Arena: return S.InArenas;
-                case SceneKind.Settlement: return S.InSettlements;
-                default: return S.InBattles;
+                case SceneKind.Hideout: return Current.InHideouts;
+                case SceneKind.Arena: return Current.InArenas;
+                case SceneKind.Settlement: return Current.InSettlements;
+                default: return Current.InBattles;
             }
         }
     }

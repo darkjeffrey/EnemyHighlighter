@@ -33,25 +33,25 @@ namespace EnemyHighlighter
         /// Which kind of scene this is, from the vanilla behaviors it was built with. The order matters: the arena
         /// and hideout ambush missions also have the settlement handlers.
         /// </summary>
-        private static SceneKind Classify(Mission m)
+        private static SceneKind Classify(Mission mission)
         {
-            if (m.GetMissionBehavior<ArenaPracticeFightMissionController>() != null
-                || m.GetMissionBehavior<ArenaDuelMissionController>() != null
-                || m.GetMissionBehavior<TournamentFightMissionController>() != null
-                || m.GetMissionBehavior<TournamentArcheryMissionController>() != null
-                || m.GetMissionBehavior<TournamentJoustingMissionController>() != null)
+            if (mission.GetMissionBehavior<ArenaPracticeFightMissionController>() != null
+                || mission.GetMissionBehavior<ArenaDuelMissionController>() != null
+                || mission.GetMissionBehavior<TournamentFightMissionController>() != null
+                || mission.GetMissionBehavior<TournamentArcheryMissionController>() != null
+                || mission.GetMissionBehavior<TournamentJoustingMissionController>() != null)
                 return SceneKind.Arena;
 
-            if (m.GetMissionBehavior<HideoutMissionController>() != null
-                || m.GetMissionBehavior<HideoutAmbushMissionController>() != null
-                || m.GetMissionBehavior<HideoutPhasedMissionController>() != null)
+            if (mission.GetMissionBehavior<HideoutMissionController>() != null
+                || mission.GetMissionBehavior<HideoutAmbushMissionController>() != null
+                || mission.GetMissionBehavior<HideoutPhasedMissionController>() != null)
                 return SceneKind.Hideout;
 
-            if (m.GetMissionBehavior<MissionAgentHandler>() != null
-                || m.GetMissionBehavior<MissionFightHandler>() != null
-                || m.GetMissionBehavior<AlleyFightMissionHandler>() != null
-                || m.GetMissionBehavior<PrisonBreakMissionController>() != null
-                || m.GetMissionBehavior<LordsHallFightMissionController>() != null)
+            if (mission.GetMissionBehavior<MissionAgentHandler>() != null
+                || mission.GetMissionBehavior<MissionFightHandler>() != null
+                || mission.GetMissionBehavior<AlleyFightMissionHandler>() != null
+                || mission.GetMissionBehavior<PrisonBreakMissionController>() != null
+                || mission.GetMissionBehavior<LordsHallFightMissionController>() != null)
                 return SceneKind.Settlement;
 
             return SceneKind.Battle;
@@ -61,11 +61,11 @@ namespace EnemyHighlighter
         /// Missions that are all about sneaking: the disguise mission and the prison break. The hideout ambush
         /// only sneaks at the start; that part is caught at run time from the mission mode (Stealth).
         /// </summary>
-        private static bool IsStealthScene(Mission m)
+        private static bool IsStealthScene(Mission mission)
         {
-            return m.GetMissionBehavior<DisguiseMissionLogic>() != null
-                || m.GetMissionBehavior<StealthMissionController>() != null
-                || m.GetMissionBehavior<PrisonBreakMissionController>() != null;
+            return mission.GetMissionBehavior<DisguiseMissionLogic>() != null
+                || mission.GetMissionBehavior<StealthMissionController>() != null
+                || mission.GetMissionBehavior<PrisonBreakMissionController>() != null;
         }
     }
 

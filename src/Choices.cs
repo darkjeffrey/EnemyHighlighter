@@ -53,7 +53,7 @@ namespace EnemyHighlighter
             Value = new Color(r, g, b, 1f).ToUnsignedInteger();
         }
 
-        public override string ToString() => Txt.Resolve(_text);
+        public override string ToString() => LocalizedText.Resolve(_text);
 
         public static readonly List<ColorChoice> All = new List<ColorChoice>
         {
@@ -69,7 +69,7 @@ namespace EnemyHighlighter
         };
     }
 
-    internal static class Txt
+    internal static class LocalizedText
     {
         /// <summary>
         /// Resolves "{=id}Text". If the game's text system isn't ready yet, TextObject hands the raw "{=id}Text"
@@ -77,15 +77,15 @@ namespace EnemyHighlighter
         /// </summary>
         public static string Resolve(string text)
         {
-            string s;
-            try { s = new TextObject(text).ToString(); }
-            catch (Exception) { s = text; }
-            if (s != null && s.StartsWith("{=", StringComparison.Ordinal))
+            string resolved;
+            try { resolved = new TextObject(text).ToString(); }
+            catch (Exception) { resolved = text; }
+            if (resolved != null && resolved.StartsWith("{=", StringComparison.Ordinal))
             {
-                int close = s.IndexOf('}');
-                if (close >= 0) s = s.Substring(close + 1);
+                int close = resolved.IndexOf('}');
+                if (close >= 0) resolved = resolved.Substring(close + 1);
             }
-            return s;
+            return resolved;
         }
     }
 }

@@ -10,7 +10,7 @@ namespace EnemyHighlighter
     {
         public override string Id => "EnemyHighlighter";
         // MCM shows DisplayName as-is (it doesn't translate it like setting names and hints), so resolve it here.
-        public override string DisplayName => Txt.Resolve("{=ehl_mcm_title}Enemy Highlighter");
+        public override string DisplayName => LocalizedText.Resolve("{=ehl_mcm_title}Enemy Highlighter");
         public override string FolderName => "EnemyHighlighter";
         public override string FormatType => "json2";
 
